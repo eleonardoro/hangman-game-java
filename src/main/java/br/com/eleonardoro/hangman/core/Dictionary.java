@@ -5,12 +5,24 @@ import java.util.List;
 import java.util.Scanner;
 
 import br.com.eleonardoro.hangman.game.GameException;
+import br.com.eleonardoro.hangman.utils.RandomUtils;
 
 public class Dictionary {
 
 	private static final String FILE_NAME = "dictionary.txt";
 	
+	private static Dictionary instance;
+	
 	private List<String> words = new ArrayList<>(); 
+	
+	private Dictionary() { load(); }
+	
+	public static Dictionary getInstance() {
+		if(instance == null)
+			instance = new Dictionary();
+		
+		return instance;			
+	}
 	
 	private void load() {
 		
@@ -24,6 +36,9 @@ public class Dictionary {
 			if(words.size() == 0)
 				throw new GameException("The word list cannot be empty");
 		}
-		
+	}
+	
+	public Word nextWord() {
+		return new Word(words.get(RandomUtils.newRanomNumber(0, words.size())));
 	}
 }

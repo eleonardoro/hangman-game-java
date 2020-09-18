@@ -7,9 +7,8 @@ public class Game {
 
 	public void start() {
 		
-		Dictionary d = new Dictionary();
-		
-		
+		Dictionary d = Dictionary.getInstance();
+				
 		
 		System.out.println(d.nextWord().getOriginalWord());
 		

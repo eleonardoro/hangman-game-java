@@ -16,6 +16,10 @@ public class Game {
 		UI.print("Welcome to the Hangman Game!");
 
 		Dictionary dictionary = Dictionary.getInstance();
+		UI.printNewLine();
+		UI.print("Dictionary used: " + dictionary.getName());
+		UI.printNewLine();
+		
 		Word word = dictionary.nextWord();
 
 		UI.print("The word has " + word.size() + " letters");

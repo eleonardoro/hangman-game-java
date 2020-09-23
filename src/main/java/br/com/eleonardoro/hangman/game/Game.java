@@ -3,14 +3,13 @@ package br.com.eleonardoro.hangman.game;
 import java.util.HashSet;
 import java.util.Set;
 
+import br.com.eleonardoro.hangman.core.Config;
 import br.com.eleonardoro.hangman.core.Dictionary;
 import br.com.eleonardoro.hangman.core.InvalidCharacterException;
 import br.com.eleonardoro.hangman.core.Word;
 import br.com.eleonardoro.hangman.ui.UI;
 
 public class Game {
-
-	private static final int MAX_ERRORS = 5;
 
 	public void start() throws InvalidCharacterException {
 
@@ -24,6 +23,11 @@ public class Game {
 		char c;
 		Set<Character> usedChars = new HashSet<>();
 		int errorCount = 0;
+		
+		int maxErrors = Integer.parseInt(Config.get("maxErrors"));
+		UI.printNewLine();
+		UI.print("You can make mistakes at most " + maxErrors + " times");
+		UI.printNewLine();
 
 		while (true) {
 			UI.print(word);
@@ -42,8 +46,8 @@ public class Game {
 				else {
 					errorCount += 1;
 
-					if (errorCount < MAX_ERRORS)
-						UI.print("You missed! You can still make " + (MAX_ERRORS - errorCount) + " mistake(s)");
+					if (errorCount < maxErrors)
+						UI.print("You missed! You can still make " + (maxErrors - errorCount) + " mistake(s)");
 				}
 			} catch (InvalidCharacterException e) {
 				UI.print("Error: " + e.getMessage());
@@ -58,7 +62,7 @@ public class Game {
 				break;
 			}
 
-			if (errorCount == MAX_ERRORS) {
+			if (errorCount == maxErrors) {
 				UI.print("You lost the game! The correct word was: " + word.getOriginalWord());
 				UI.print("End of the game!");
 				break;

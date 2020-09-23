@@ -15,8 +15,8 @@ public class Config {
 		}
 	}
 	
-	public static String get(String name) {
-		return props.getProperty(name);
+	public static String get(String key) {
+		return props.getProperty(key);
 	}
 	
 	public static void setMaxErrors(String maxErrors) {

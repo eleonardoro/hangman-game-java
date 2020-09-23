@@ -11,7 +11,7 @@ import br.com.eleonardoro.hangman.ui.UI;
 
 public class Game {
 
-	public void start() throws InvalidCharacterException {
+	public void start(String[] args) throws InvalidCharacterException {
 
 		UI.print("Welcome to the Hangman Game!");
 
@@ -24,8 +24,15 @@ public class Game {
 		Set<Character> usedChars = new HashSet<>();
 		int errorCount = 0;
 		
-		int maxErrors = Integer.parseInt(Config.get("maxErrors"));
+		int maxErrors = 0;
 		UI.printNewLine();
+		if(args.length > 0) {
+			Config.setMaxErrors(args[0]);
+			maxErrors = Integer.parseInt(args[0]);
+		}else {
+			maxErrors = Integer.parseInt(Config.get("maxErrors"));
+		}
+		
 		UI.print("You can make mistakes at most " + maxErrors + " times");
 		UI.printNewLine();
 
